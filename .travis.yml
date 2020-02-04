@@ -9,3 +9,16 @@ before_install:
 
 script:
   - docker run -e CI=true mitrasupratik/docker-react npm run test
+
+deploy:
+  provide: elasticbeanstalk
+  region: "us-east-1"
+  app: "sup-docker-react"
+  env: "SupDockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-923210206684"
+  bucket_path: "sup-docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key:
+    secure: "$AWS_SECRET_ACCESS_KEY"
